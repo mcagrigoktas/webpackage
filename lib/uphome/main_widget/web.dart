@@ -30,13 +30,12 @@ class _UphomeWebSiteMainState extends State<UphomeWebSiteMain> {
 
   @override
   void initState() {
-    var element = html.DivElement()
-
-      /// ..src = UphomeWeb.getHTMLStrings(navBar: widget.navBar, itemList: widget.itemList, primaryColor: widget.primaryColor, splashLogoUrl: widget.splashLogoUrl)
+    var element = html.IFrameElement()
+      ..srcdoc = UphomeWeb.getHTMLStrings(navBar: widget.navBar, itemList: widget.itemList, primaryColor: widget.primaryColor, splashLogoUrl: widget.splashLogoUrl)
       ..style.width = '100%'
+      // ..src = 'https://www.mandyholding.web.app'
       ..style.height = '100%'
       ..style.border = 'none';
-    element.appendHtml(UphomeWeb.getHTMLStrings(navBar: widget.navBar, itemList: widget.itemList, primaryColor: widget.primaryColor, splashLogoUrl: widget.splashLogoUrl));
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory('webview$key', (int viewId) => element);
     super.initState();
