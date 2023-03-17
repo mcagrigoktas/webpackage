@@ -34,14 +34,12 @@ class Bolum3 extends Section {
   String getHtml() {
     return '''
 
- <section class="projects_b jarallax" style="background-image: url(assets/img/bg_home_black.png)"  ${getSectionId()}>
+ <section class="projects_b jarallax" style="background-image: url($_pathPrefix/img/bg_home_black.png)"  ${getSectionId()}>
     <div class="container">
             <div class="head_block">
               <h2 class="lax" data-lax-preset_large="zoomIn-0.9">$title</h2>
               <div class="line_title lax" data-lax-preset_large="zoomIn-0.7">
-                <svg>
-                  <use xlink:href="assets/img/icons/sprite.svg#lamp_white_s"></use>
-                </svg>
+               <img src="icons/icon.png" width="21px" height="21px" >
               </div>
               <p class="lax" data-lax-preset_large="fadeInOut-10 crazy-10">$subTitle</p>
             </div>

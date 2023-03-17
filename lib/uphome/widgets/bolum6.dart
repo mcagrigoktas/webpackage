@@ -18,7 +18,7 @@ class Bolum6 extends Section {
   @override
   String getHtml() {
     return '''
-<section class="blocks_act jarallax" style="background-image: url(assets/img/bg_home_black_03.jpg)"  ${getSectionId()}>
+<section class="blocks_act jarallax" style="background-image: url($_pathPrefix/img/bg_home_black_03.jpg)"  ${getSectionId()}>
     <div class="container">
       <div class="row">
         <div class="head_block_left col-12 col-lg-6"><span class="$icon"></span>

@@ -3,11 +3,9 @@ part of 'z_fullsite.dart';
 class Header2 extends Section {
   final List<Header2Item> itemList;
   final String? sectionId;
-  final String videoSrc;
 
   final String mainImage;
   Header2({
-    this.videoSrc = 'https://player.vimeo.com/video/171139017?background=1&amp;autoplay=1&amp;loop=1&amp;byline=0&amp;title=0',
     required this.itemList,
     this.sectionId,
     this.mainImage = '$_pathPrefix/img/app/app.png',
@@ -39,9 +37,8 @@ class Header2 extends Section {
     <div class="slide_t">
             ${getItems()}
             <span class="b_scroll"><i>
-          <svg>
-            <use xlink:href="assets/img/icons/sprite.svg#Mouse_s"></use>
-          </svg></i></span>
+                         <img src="icons/icon.png" width="21px" height="21px" >
+</i></span>
       <div class="arrows">
         <div class="arrow_l"></div>
         <div class="arrow_r"></div>

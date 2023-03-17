@@ -6,6 +6,7 @@ class Header1 extends Section {
   final String videoSrc;
   final bool autoPlay;
   final bool muted;
+  final bool control;
 
   Header1({
     this.videoSrc = 'https://player.vimeo.com/video/171139017?background=1&amp;autoplay=1&amp;loop=1&amp;byline=0&amp;title=0',
@@ -13,6 +14,7 @@ class Header1 extends Section {
     this.sectionId,
     this.autoPlay = false,
     this.muted = false,
+    this.control = false,
   });
 
   String getItems() {
@@ -31,11 +33,24 @@ class Header1 extends Section {
   }
   // <iframe src="$videoSrc" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="allowfullscreen"></iframe>
 
-  String auto_play() => autoPlay ? 'autoplay' : '';
+  String _autoPlay() => autoPlay ? 'autoplay' : '';
   String _muted() => muted ? 'muted' : '';
+  String _control() => muted ? 'control' : '';
 
   @override
   String getHtml() {
+    if (autoPlay && !additionalScriptsCaches.contains('Header1')) {
+      additionalScriptsCaches.add('Header1');
+      additionalScripts += '''
+<script>
+    const video8bv = document.getElementById("video8bv");
+    setTimeout(() => {
+        video8bv.play();
+    }, 300);
+</script>
+''';
+    }
+
     return '''
 
  <section  ${getSectionId()}>
@@ -44,7 +59,7 @@ class Header1 extends Section {
             ${getItems()}
       <div class="video_block" >
      
-      <video  style="width: 100%;height: 100%; object-fit: cover;" ${auto_play()}  ${_muted()}>
+      <video  id="video8bv" style="width: 100%;height: 100%; object-fit: cover;"  ${_muted()} ${_control()}>
   <source src="$videoSrc" type="video/mp4">
 </video>
       </div><span class="b_scroll"></span>

@@ -34,9 +34,8 @@ class Bolum7 extends Section {
             <div class="head_block">
               <h2 class="lax" data-lax-preset_large="zoomIn-0.9">Gallery</h2>
               <div class="line_title lax" data-lax-preset_large="zoomIn-0.7">
-                <svg>
-                  <use xlink:href="assets/img/icons/sprite.svg#lamp_white_s"></use>
-                </svg>
+                              <img src="icons/icon.png" width="21px" height="21px" >
+
               </div>
               <p class="lax" data-lax-preset_large="fadeInOut-10 crazy-10">A large selection of houses in the south of Ukraine, call, always happy to help with the choice of your dreams</p>
             </div>

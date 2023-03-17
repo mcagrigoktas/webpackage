@@ -40,6 +40,12 @@ class NavigatePageItem {
   final List<NavigatePageItem>? subItems;
   final bool blank;
   NavigatePageItem({required this.name, this.url, this.subItems, this.blank = false});
+
+  String getLink() {
+    if (url == null) return '';
+    if (url!.startsWith('#')) return 'onclick="document.querySelector(\'$url\').scrollIntoView({ behavior: \'smooth\' })"';
+    return 'href="$url"';
+  }
 }
 
 enum Style {

@@ -76,13 +76,20 @@ class UphomeWeb {
       <h3>Loading..</h3>
     </div>
   </div>
+
+
+  
     ''';
   }
 
   static _addBodyEnd() {
     return '''
+<section id="Projects">
+   Bölüm içeriği buraya gelecek
+</section>
 <script src="$_pathPrefix/js/libs.min.js"></script>
 <script src="$_pathPrefix/js/index.min.js"></script>
+ $additionalScripts
 </body>
 ''';
   }

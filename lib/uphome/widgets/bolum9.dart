@@ -5,7 +5,7 @@ class Bolum9 extends Section {
   final List<String> itemList;
   Bolum9({
     this.sectionId,
-    this.itemList = const ['$_pathPrefix/img/icons/sprite.svg#logo_01_s'],
+    this.itemList = const ['/icons/icon.png'],
   });
 
   String getItems() {

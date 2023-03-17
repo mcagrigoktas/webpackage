@@ -12,7 +12,7 @@ class NavBar extends Section {
   List<NavigatePageItem> itemList;
   final String phoneText;
   NavBar({
-    this.iconUrl = '$_pathPrefix/img/icons/sprite.svg#logo_s',
+    this.iconUrl = 'icons/icon.png',
     this.siteName = '',
     required this.itemList,
     this.sectionId,
@@ -25,7 +25,7 @@ class NavBar extends Section {
     item.subItems!.forEach((element) {
       final blankText = element.blank ? 'target="_blank"' : '';
       result += '''
-<a href="${element.url}" $blankText>${element.name}</a>
+<a ${element.getLink()} $blankText style="cursor: pointer;">${element.name}</a>
 ''';
     });
 
@@ -46,11 +46,11 @@ class NavBar extends Section {
       if (element.subItems == null) {
         final blankText = element.blank ? 'target="_blank"' : '';
         result += '''
-             <li><a href="${element.url}" $blankText>${element.name}</a></li>
+             <li><a ${element.getLink()}  $blankText style="cursor: pointer;">${element.name} </a></li>
 ''';
       } else {
         result += '''
-<li class="active"><a href="index.html">${element.name}<i class="fas fa-chevron-down"></i></a>
+<li class="active"><a>${element.name}<i class="fas fa-chevron-down"></i></a>
             <div class="dropdown-menu">${getSubItems(element)}</div>
           </li>
                 ''';
@@ -60,18 +60,21 @@ class NavBar extends Section {
     return result;
   }
 
+  String getIcon() {
+    return '<img src="$iconUrl" width="36px" height="36px" >';
+  }
+
   @override
   String getSectionId() => sectionId == null ? '' : 'id="$sectionId"';
 
   @override
   String getHtml() {
     return '''
+
 <nav class="${getStyleConfig()} navbar navbar-expand-xl"  ${getSectionId()}>
 
       <div class="logo">
-        <svg>
-          <use xlink:href="$_pathPrefix/img/icons/sprite.svg#logo_s"></use>
-        </svg>
+     ${getIcon()}
         ${getSiteName()}
         
       </div>

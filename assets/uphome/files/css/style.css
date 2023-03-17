@@ -7865,7 +7865,7 @@ section .head_block {
 }
 
 #home .projects_b {
-  background: url(../img/bg_home_black.png) no-repeat;
+  background: url(assets/packages/webpackage/assets/uphome/files/img/bg_home_black.png) no-repeat;
   background-size: cover;
 }
 
