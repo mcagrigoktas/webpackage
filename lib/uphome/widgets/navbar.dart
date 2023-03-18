@@ -25,7 +25,7 @@ class NavBar extends Section {
     item.subItems!.forEach((element) {
       final blankText = element.blank ? 'target="_blank"' : '';
       result += '''
-<a ${element.getLink()} $blankText style="cursor: pointer;">${element.name}</a>
+             <li><a ${element.getLink()}  $blankText style="cursor: pointer;">${element.name} </a></li>
 ''';
     });
 
@@ -71,11 +71,12 @@ class NavBar extends Section {
   String getHtml() {
     return '''
 
-<nav class="${getStyleConfig()} navbar navbar-expand-xl"  ${getSectionId()}>
+
+<nav class="${getStyleConfig()} navbar navbar-expand-xl"  ${getSectionId()} style="z-index:10000">
 
       <div class="logo">
      ${getIcon()}
-        ${getSiteName()}
+     ${getSiteName()}
         
       </div>
      

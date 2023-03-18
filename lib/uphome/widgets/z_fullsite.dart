@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+
 import '../../utils/section.dart';
 
 part 'header1.dart';
@@ -19,7 +23,7 @@ const _pathPrefix = "assets/packages/webpackage/assets/uphome/files";
 class UphomeWeb {
   UphomeWeb._();
 
-  static String getHTMLStrings({required String primaryColor, required String splashLogoUrl, required Section navBar, required List<Section> itemList}) {
+  static Future<String> getHTMLStrings({required String primaryColor, required String splashLogoUrl, required Section navBar, required List<Section> itemList}) async {
     var site = '';
     site += _addDocType();
     site += _addHead();
@@ -27,7 +31,7 @@ class UphomeWeb {
     site += _addPreLoader();
     site += _addNavBar(navBar);
     site += _addBody(itemList);
-    site += _addBodyEnd();
+    site += await _addBodyEnd();
 
     return site;
   }
@@ -57,6 +61,21 @@ class UphomeWeb {
   }
 
   static _addPreLoader() {
+    if (!additionalScriptsCaches.contains('PreLoader')) {
+      additionalScriptsCaches.add('PreLoader');
+      additionalScripts += '''
+<script>
+  	var rnPre = \$('#rn-preloader-wrap');
+	setTimeout(function() {
+			rnPre.addClass('rn-preloaded');
+		}, 1500);
+		setTimeout(function() {
+			rnPre.remove();
+		}, 2500);
+</script>
+''';
+    }
+
     return '''
     <div id="rn-preloader-wrap">
     <div class="rn-preloader-cont">
@@ -82,13 +101,10 @@ class UphomeWeb {
     ''';
   }
 
-  static _addBodyEnd() {
+  static Future<String> _addBodyEnd() async {
     return '''
-<section id="Projects">
-   Bölüm içeriği buraya gelecek
-</section>
-<script src="$_pathPrefix/js/libs.min.js"></script>
-<script src="$_pathPrefix/js/index.min.js"></script>
+<script> ${await getLibsJs()} </script>
+<script> ${await getIndexJs()} </script>
  $additionalScripts
 </body>
 ''';
@@ -100,5 +116,26 @@ class UphomeWeb {
 
   static String _addNavBar(Section item) {
     return item.getHtml();
+  }
+
+  //? Scripts
+  static Future<String> getIndexJs() async {
+    final langByteData = await rootBundle.load('packages/webpackage/assets/uphome/files/js/index.min.js');
+    return utf8.decode(langByteData.buffer.asUint8List());
+  }
+
+  static Future<String> getLibsJs() async {
+    final langByteData = await rootBundle.load('packages/webpackage/assets/uphome/files/js/libs.min.js');
+    return utf8.decode(langByteData.buffer.asUint8List());
+  }
+
+  static Future<String> getIndexCss() async {
+    final langByteData = await rootBundle.load('packages/webpackage/assets/uphome/files/css/style.css');
+    return utf8.decode(langByteData.buffer.asUint8List());
+  }
+
+  static Future<String> getLibsCss() async {
+    final langByteData = await rootBundle.load('packages/webpackage/assets/uphome/files/css/libs.min.css');
+    return utf8.decode(langByteData.buffer.asUint8List());
   }
 }
